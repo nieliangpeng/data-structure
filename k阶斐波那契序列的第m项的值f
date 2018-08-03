@@ -1,0 +1,38 @@
+#include<stdio.h>
+int fib(int k,int m,int *temp);
+int main(void)
+{
+    int k,m,temp[1000],f;
+    printf("输入k:");
+    scanf("%d",&k);
+    printf("输入m:");
+    scanf("%d",&m);
+    f=fib(k,m,temp);
+    printf("%d阶斐波那契序列的第%d项值为%d",k,m,f);
+}
+int fib(int k,int m,int *temp)
+{
+    int f,i,j=0;
+    int sum=1;
+    if(k<2||m<0)
+        printf("重新输入k和m的值！");
+    if(m<k-1) 
+        return f=0; 
+    else if (m==k-1 || m==k)
+        return f=1; 
+    else
+   {    
+       for(i=0;i<=k-2;i++) 
+         temp[i]=0; 
+       temp[k-1]=1;temp[k]=1;
+      
+       for( i=k+1;i<=m;i++,j++) //求出序列第k至第m个元素的值
+       { 
+       
+          sum=2*sum-temp[j];       
+          temp[i]=sum;
+       }
+       f=temp[m]; 
+       return f;
+   } 
+}
