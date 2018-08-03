@@ -1,0 +1,58 @@
+#include <stdio.h>
+typedef struct node{
+    int data;
+    struct node *left;
+    struct node *right;
+}node,*BiTree;
+
+int TreeData(BiTree T){
+    int a,a1,a2;
+    if(T==NULL) a=0;
+    else{
+        
+        a1=TreeData(T->left);
+        a2=TreeData(T->right);
+        a=a1+a2+1;
+    }
+    return a;
+}
+//①、求出以T为根的子树的结点个数。
+int childTreeData(BiTree T){
+    int childGs=TreeData(T)-1;
+}
+
+
+int BinLeftChildTreeDepth(BiTree T)//这里的T为二叉树根节点T下的左子树的根
+{
+	int depth,depthleft,depthright;
+    if(T==NULL) depth=0;
+    else
+    {
+        depthleft=BinLeftChildTreeDepth(T->left);
+        depthright=BinLeftChildTreeDepth(T->right);
+        depth=depthleft>depthright?depthleft+1:depthright+1;
+    }
+    return depth;
+}
+int BinRightChildTreeDepth(BiTree T)//这里的T为二叉树根节点T下的右子树的根
+{
+	int depth,depthleft,depthright;
+    if(T==NULL) depth=0;
+    else
+    {
+        depthleft=BinRightChildTreeDepth(T->left);
+        depthright=BinRightChildTreeDepth(T->right);
+        depth=depthleft>depthright?depthleft+1:depthright+1;
+    }
+    return depth;
+}
+//②、 求出以T为根的子树的高度。
+int ChildTreeDepth(BiTree T){//这里的T为二叉树根节点T
+    int RightChildTreeDepth=BinRightChildTreeDepth(T->right);
+    int LeftChildTreeDepth=BinLeftChildTreeDepth(T->left);
+    printf("以T为根的左子树的高度为%d ,以T为根的右子树的高度为%d",LeftChildTreeDepth,RightChildTreeDepth);
+}
+int main(void){
+    return 0;
+}
+
