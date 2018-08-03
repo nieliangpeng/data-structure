@@ -1,0 +1,140 @@
+#include<stdio.h>
+#include<string.h>
+#include<iostream>
+using namespace std;
+#define MAXSTRLEN 255
+typedef unsigned char SString[MAXSTRLEN+1];
+bool StrAssign(SString T,char *chars)
+
+{
+    int i;
+    if(strlen(chars)>MAXSTRLEN)
+        return false;
+    else
+    {
+        T[0]=strlen(chars);
+        for(i=1;i<=T[0];i++)
+        {
+            T[i]=*(chars+i-1);
+           
+        }
+         int j=i;
+         for(j;j<=255;j++)
+             T[j]=NULL;
+        return true;
+
+    }
+
+}
+bool  replaceStr(SString s,SString t,SString p){
+    int i=1;
+    int j=1;
+    int n=0;
+    int c;
+   
+    //找到子串位置
+    while(i<=s[0]&&j<=t[0]){
+        if(s[i]==t[j]){
+            i++;j++;
+        }
+        else
+        {
+            i=i-j+2;
+            j=1;
+        
+        }
+    
+    
+    }
+    if(j>t[0]) 
+        n=i-t[0];
+    
+    else 
+        n=0;
+    //cout<<n<<endl;
+    //替换代码
+
+    if(n+t[0]>s[0])
+    {
+          for(c=1;c<=p[0];c++){
+            s[n]=p[c];
+            n++;
+           
+        }
+      s[0]=s[0]+p[0];
+      return true;
+    
+    }
+
+    n=i-t[0];
+
+    if(t[0]>=p[0]){ 
+        for(c=1;c<=p[0];c++){
+            s[n]=p[c];
+            n++;
+        
+        }
+
+        n=i-t[0];
+
+        if(t[0]>p[0]){
+             int e=n+t[0];
+             int f=n+p[0];
+            for(c=1;c<=s[0]-(t[0]+n-1);c++)
+            {
+               
+                s[f]=s[e];
+                f++;e++;
+            
+            }
+        
+        }
+        s[0]=s[0]+p[0]-t[0];
+        return true;
+    
+    }
+
+    if(p[0]>t[0]){
+    
+         int h=p[0]-t[0];
+         int g=s[0]+h;
+         int l=s[0];
+        for(c=1;c<=s[0]-(n+t[0])+1;c++){
+        
+           
+            
+           
+            s[g]=s[l];
+            g--;
+            l--;
+           
+        
+        }
+      for(c=1;c<=p[0];c++){
+            s[n]=p[c];
+            n++;
+        
+        }
+      s[0]=s[0]+p[0]-t[0];
+      return true;
+    }
+
+
+
+}
+
+int main(void){
+    SString s,t,p;
+    int i;
+    StrAssign(s,"abcabbreadyeafd");
+    StrAssign(t,"ready");
+    StrAssign(p,"replaceok");
+    replaceStr(s,t,p);
+   for(i=1;i<=s[0];i++)
+       printf("%c",s[i]);
+    return 0;
+
+
+}
+
+
