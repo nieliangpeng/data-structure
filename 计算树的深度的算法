@@ -1,0 +1,28 @@
+#include <stdio.h>
+typedef int Element ;
+typedef struct CSNode{
+    Element data;
+    struct CSNode *firstChild;
+    struct CSNode *nextSibling;
+}CSNode,*CSTree;
+
+//以孩子-兄弟链表表示的树编写计算树的深度的算法
+
+int depthCSTree(CSTree T){
+    int maxd,depth;
+    CSTree p;
+    if(T==NULL) return 0;
+    else{
+        for(maxd=0,p=T->firstChild;p;p=p->nextSibling)
+        {
+            if(depth=depthCSTree(p)>maxd) maxd=depth;
+            return maxd+1;
+
+        }
+    
+    }
+}
+
+int main(void){
+    return 0;
+}
